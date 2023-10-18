@@ -43,7 +43,7 @@ int usage()
 	ZLog::Print("-b, --bundle_id\t\tNew bundle id to change.\n");
 	ZLog::Print("-n, --bundle_name\tNew bundle name to change.\n");
 	ZLog::Print("-r, --bundle_version\tNew bundle version to change.\n");
-	ZLog::Print("--rm_provision\tremove emmbedded.mobileprovision file.(not recommend)\n");
+	ZLog::Print("--rm_provision\tremove mobileprovision file.\n");
 	ZLog::Print("-e, --entitlements\tNew entitlements to change.\n");
 	ZLog::Print("-z, --zip_level\t\tCompressed level when output the ipa file. (0-9)\n");
 	ZLog::Print("-l, --dylib\t\tPath to inject dylib file.\n");
