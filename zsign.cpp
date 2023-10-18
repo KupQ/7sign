@@ -18,7 +18,7 @@ const struct option options[] = {
 	{"bundle_id", required_argument, NULL, 'b'},
 	{"bundle_name", required_argument, NULL, 'n'},
 	{"bundle_version", required_argument, NULL, 'r'},
-	{"rm_provision", no_argument, &remove_embedded, 1},
+	{"rm_provision", no_argument, &rm_provision, 1},
 	{"entitlements", required_argument, NULL, 'e'},
 	{"output", required_argument, NULL, 'o'},
 	{"zip_level", required_argument, NULL, 'z'},
