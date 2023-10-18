@@ -177,6 +177,7 @@ options:
 -b, --bundle_id      New bundle id to change.
 -n, --bundle_name    New bundle name to change.
 -r, --bundle_version New bundle version to change.
+--rm_provision  remove mobileprovision file.
 -e, --entitlements   New entitlements to change.
 -z, --zip_level      Compressed level when output the ipa file. (0-9)
 -l, --dylib          Path to inject dylib file.
