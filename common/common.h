@@ -26,6 +26,8 @@
 #include <iostream>
 using namespace std;
 
+extern int rm_provision;
+
 #define LE(x) _Swap(x)
 #define BE(x) _Swap(x)
 
