@@ -18,6 +18,7 @@ const struct option options[] = {
 	{"bundle_id", required_argument, NULL, 'b'},
 	{"bundle_name", required_argument, NULL, 'n'},
 	{"bundle_version", required_argument, NULL, 'r'},
+	{"rm_provision", no_argument, &remove_embedded, 1},
 	{"entitlements", required_argument, NULL, 'e'},
 	{"output", required_argument, NULL, 'o'},
 	{"zip_level", required_argument, NULL, 'z'},
@@ -42,6 +43,7 @@ int usage()
 	ZLog::Print("-b, --bundle_id\t\tNew bundle id to change.\n");
 	ZLog::Print("-n, --bundle_name\tNew bundle name to change.\n");
 	ZLog::Print("-r, --bundle_version\tNew bundle version to change.\n");
+	ZLog::Print("--rm_provision\tremove emmbedded.mobileprovision file.(not recommend)\n");
 	ZLog::Print("-e, --entitlements\tNew entitlements to change.\n");
 	ZLog::Print("-z, --zip_level\t\tCompressed level when output the ipa file. (0-9)\n");
 	ZLog::Print("-l, --dylib\t\tPath to inject dylib file.\n");
@@ -204,7 +206,8 @@ int main(int argc, char *argv[])
 		StringFormat(strFolder, "/tmp/zsign_folder_%llu", timer.Reset());
 		ZLog::PrintV(">>> Unzip:\t%s (%s) -> %s ... \n", strPath.c_str(), GetFileSizeString(strPath.c_str()).c_str(), strFolder.c_str());
 		RemoveFolder(strFolder.c_str());
-		if (!SystemExec("unzip -qq -d '%s' '%s'", strFolder.c_str(), strPath.c_str()))
+		if (!SystemExec("7z x '%s' -oc:'%s'", strPath.c_str(), strFolder.c_str()))	
+	//	if (!SystemExec("unzip -qq -d '%s' '%s'", strFolder.c_str(), strPath.c_str()))
 		{
 			RemoveFolder(strFolder.c_str());
 			ZLog::ErrorV(">>> Unzip Failed!\n");
@@ -242,7 +245,8 @@ int main(int argc, char *argv[])
 			{
 				uZipLevel = uZipLevel > 9 ? 9 : uZipLevel;
 				RemoveFile(strOutputFile.c_str());
-				SystemExec("zip -q -%u -r '%s' Payload", uZipLevel, strOutputFile.c_str());
+				SystemExec("7z a -tzip -mx=0 -r '%s' Payload", strOutputFile.c_str());
+			//	SystemExec("zip -q -%u -r '%s' Payload", uZipLevel, strOutputFile.c_str());
 				chdir(szOldFolder);
 				if (!IsFileExists(strOutputFile.c_str()))
 				{
